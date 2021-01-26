@@ -27,6 +27,22 @@ type GetUsersRequest struct {
 	Email     string `schema:"email"`
 }
 
+type UpdateUserRequest struct {
+	ID        string
+	FirstName string `json:"first_name,omitempty"`
+	LastName  string `json:"last_name,omitempty"`
+	Email     string `json:"email,omitempty"`
+}
+
+func (r UpdateUserRequest) ValidateUpdateUserRequest() error {
+	return validation.ValidateStruct(&r,
+		validation.Field(&r.ID, validation.Required),
+		validation.Field(&r.Email, is.Email),
+		validation.Field(&r.FirstName, validation.Length(3, 20)),
+		validation.Field(&r.LastName, validation.Length(3, 20)),
+	)
+}
+
 // eg. Validation if either phone no or email was required
 // func (r GetUsersRequest) ValidateGetUsersRequest() error {
 // 	return validation.ValidateStruct(&r,

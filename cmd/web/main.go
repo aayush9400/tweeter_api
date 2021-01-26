@@ -26,7 +26,7 @@ func routeHandler(handler *handler.HttpApp) {
 	apiV1.HandleFunc("/users", handler.GetUsers).Methods("GET")
 	apiV1.HandleFunc("/user/{user_id}", handler.GetUserByID).Methods("GET")
 	apiV1.HandleFunc("/user/{user_id}", handler.UpdateUser).Methods("PUT")
-	apiV1.HandleFunc("/user/{user_id}", handler.UpdateUser).Methods("DELETE")
+	apiV1.HandleFunc("/user/{user_id}", handler.DeleteUser).Methods("DELETE")
 
 	// Tweets
 	// TODO: Implement the handler
